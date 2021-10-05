@@ -1,6 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
+const { DefinePlugin, HotModuleReplacementPlugin, ProvidePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const appConfig = require('./src/global/app.config');
 
 function resolve(dir) {
     return path.resolve(__dirname, dir);
@@ -8,7 +9,7 @@ function resolve(dir) {
 
 module.exports = {
     entry: './src/index.js',
-    mode: 'development',
+    mode: appConfig('environment'),
     module: {
         rules: [
             {
@@ -35,7 +36,8 @@ module.exports = {
         extensions: ['*', '.js', '.jsx'],
         alias: {
             '@style': resolve('src/styles'),
-            '@': resolve('src'),
+            '@global': resolve('src/global'),
+            '@components': resolve('src/components'),
         },
     },
     output: {
@@ -48,12 +50,20 @@ module.exports = {
         port: 9000,
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        new HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            title: 'My application',
+            title: appConfig('name'),
             filename: 'index.html',
             template: 'public/index.html',
             inject: true,
+        }),
+        new DefinePlugin({
+            ENVIRONMENT_MODE: JSON.stringify(process.env.NODE_ENV),
+            IS_PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production'),
+            APP_NAME: JSON.stringify(appConfig('name')),
+        }),
+        new ProvidePlugin({
+            PropTypes: 'prop-types',
         }),
     ],
 };

@@ -48,6 +48,12 @@ module.exports = {
             { name: 'Link', linkAttribute: 'to' },
         ],
     },
+    globals: {
+        ENVIRONMENT_MODE: true,
+        IS_PRODUCTION: true,
+        APP_NAME: true,
+        PropTypes: true,
+    },
     rules: {
         'camelcase': [0, {
             properties: 'never',
