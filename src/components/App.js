@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '@style/components/App.scss';
 
-import { USER, APP } from '@global/constants';
+import { USER, APP } from '@constants/constants';
 
 import { Header } from '@components/Header';
 import { Message }from '@components/Message';

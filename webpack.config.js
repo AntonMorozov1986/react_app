@@ -1,7 +1,7 @@
 const path = require('path');
 const { DefinePlugin, HotModuleReplacementPlugin, ProvidePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const appConfig = require('./src/global/app.config');
+const appConfig = require('./src/global/configs/app.config');
 
 function resolve(dir) {
     return path.resolve(__dirname, dir);
@@ -38,6 +38,8 @@ module.exports = {
             '@style': resolve('src/styles'),
             '@global': resolve('src/global'),
             '@components': resolve('src/components'),
+            '@constants': resolve('src/global/constants'),
+            '@configs': resolve('src/global/configs'),
         },
     },
     output: {
@@ -47,7 +49,6 @@ module.exports = {
     },
     devServer: {
         compress: true,
-        port: 9000,
     },
     plugins: [
         new HotModuleReplacementPlugin(),
