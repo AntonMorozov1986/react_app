@@ -49,6 +49,8 @@ module.exports = {
     },
     devServer: {
         compress: true,
+        hot: true,
+        host: appConfig('local_domain'),
     },
     plugins: [
         new HotModuleReplacementPlugin(),

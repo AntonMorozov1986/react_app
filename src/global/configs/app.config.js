@@ -9,6 +9,11 @@ const APP_CONFIG = {
         value: process.env.REACT_ENVIRONMENT_MODE,
         type: String,
     },
+    local_domain: {
+        default: 'chatix.local',
+        value: process.env.VUE_APP_LOCAL_DEV_DOMAIN,
+        type: String,
+    },
 };
 
 module.exports = key => {
