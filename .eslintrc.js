@@ -18,6 +18,7 @@ module.exports = {
     },
     plugins: [
         'react',
+        'react-hooks',
     ],
     settings: {
         react: {
@@ -116,5 +117,9 @@ module.exports = {
         // react rules
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
+
+        // react-hooks
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
 };

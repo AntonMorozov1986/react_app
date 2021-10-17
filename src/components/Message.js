@@ -1,8 +1,13 @@
 import React from 'react';
+import '@style/components/Message.scss';
 
-export function Message({ user }) {
-    return <h3>{ user.name }, Добро пожаловать в ChatiX</h3>;
+export function Message({ message }) {
+    return (
+        <li className="Message">
+            <span>{message.author}: </span> {message.text}
+        </li>
+    );
 }
 Message.propTypes = {
-    user: PropTypes.object,
+    message: PropTypes.object,
 };

@@ -1,0 +1,57 @@
+@import "./src/styles/scss.variables/colors";
+
+.MessageInput {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0.3em 0 0;
+    padding: 10px 20px;
+    background-color: $blue_light;
+    border: 1px solid $blue_dark;
+    border-radius: 10px;
+
+    &:focus-within {
+        box-shadow: 0 0 2px 1px $blue_dark;
+    }
+
+    & .text-input {
+        flex-grow: 2;
+        margin: 0 1em 0 0;
+        padding: 5px;
+        color: $black;
+        font-size: 1.2em;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $blue_dark;
+        outline: none;
+
+        &::placeholder {
+            color: $gray;
+        }
+    }
+
+    & .send-btn {
+        padding: 4px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        &-ico {
+            width: 2em;
+            height: 2em;
+            padding: 0;
+            color: $blue_dark;
+            border-radius: 3px;
+
+            &:hover {
+                color: $orange;
+            }
+
+            &:active {
+                color: $white;
+            }
+        }
+    }
+}
