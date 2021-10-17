@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '@style/components/App.scss';
 
-import { USER, APP } from '@constants/constants';
+import { USER, APP, BOT_MESSAGE_LIST } from '@constants/constants';
 
 import { Header } from '@components/Header';
 import { Greeting } from '@components/Greeting';
@@ -16,21 +16,13 @@ export function App() {
         const lastMessage = messageList[messageList.length -1];
         let timeoutId = null;
         if (messageList.length && lastMessage?.author !== 'ChatiXBot') {
-            const botMessageList = [
-                'Привет',
-                'Как твои дела?',
-                'У меня все хорошо',
-                'Может завтра встретимся?',
-            ];
             const getBotMessageText = () => {
-                const randomMessageListIndex = Math.floor(Math.random() * botMessageList.length);
-                return botMessageList[randomMessageListIndex];
+                const randomMessageListIndex = Math.floor(Math.random() * BOT_MESSAGE_LIST.length);
+                return BOT_MESSAGE_LIST[randomMessageListIndex];
             };
-            const botMessage = {
-                author: 'ChatiXBot',
-                text: getBotMessageText(),
-            };
-            timeoutId = setTimeout(() => (setMessageList([...messageList, botMessage])), 1500);
+            timeoutId = setTimeout(() => (setMessageList([
+                ...messageList, { author: 'ChatiXBot', text: getBotMessageText() },
+            ])), 1500);
         }
 
         return () => clearTimeout(timeoutId);
