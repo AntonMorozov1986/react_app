@@ -1,0 +1,15 @@
+@import "./src/styles/scss.variables/colors";
+
+.chat {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1000px;
+    padding: 12px;
+    border: 1px solid $black;
+    border-radius: 5px;
+
+    &__messages {
+        flex-grow: 2;
+    }
+}
