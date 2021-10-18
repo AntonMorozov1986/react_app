@@ -1,0 +1,8 @@
+@import "./src/styles/scss.variables/colors";
+
+.roomsList {
+    margin: 0 1em 0 0;
+    padding: 15px;
+    overflow-y: auto;
+    list-style-type: none;
+}

@@ -1,0 +1,13 @@
+@import "./src/styles/scss.variables/colors";
+
+.messageList {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    overflow-y: auto;
+    list-style-type: none;
+}
