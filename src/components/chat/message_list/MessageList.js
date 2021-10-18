@@ -1,29 +1,26 @@
 import React from 'react';
-
-import { List } from '@mui/material';
+import styles from './MessageList.module.scss';
 
 import { Message }from '@components/chat/message_list/message/Message';
-
-const styles = {
-    width: '100%',
-};
 
 export function MessageList({ list }) {
     if (list.length) {
         return (
-            <List className="MessageList"
-                sx={styles}
+            <ul
+                className={styles.messageList}
             >
                 {list.map((item, index) => {
                     return (
-                        <Message message={item} key={index}/>
+                        <Message
+                            message={item}
+                            key={index}/>
                     );
                 })}
-            </List>
+            </ul>
         );
     }
     return (
-        <h3>У вас пока нет сообщений. Напишите что-нибудь</h3>
+        <h3 className={styles.messageList}>У вас пока нет сообщений. Напишите что-нибудь</h3>
     );
 
 

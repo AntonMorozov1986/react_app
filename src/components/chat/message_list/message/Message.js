@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import classNames from 'classnames';
+import styles from './Message.module.scss';
 
-import { ListItem, ListItemText } from '@mui/material';
+import { ListItemText } from '@mui/material';
+
+import { USER } from '@constants/constants';
 
 export function Message({ message }) {
+    const { author, text } = message;
+    const messageEl = useRef(null);
+    useEffect(() => {
+        messageEl.current.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    },[message]);
+
     return (
-        <ListItem>
+        <li
+            ref={messageEl}
+            className={classNames(styles.message, {
+                [styles.userMessage]: author === USER.name,
+            })}
+        >
             <ListItemText
-                primary={message.author}
-                secondary={message.text}
+                primary={author}
+                secondary={text}
             />
-        </ListItem>
+        </li>
     );
 }
 Message.propTypes = {

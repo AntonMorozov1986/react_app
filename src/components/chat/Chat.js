@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BOT_MESSAGE_LIST, CHATS_LIST } from '@constants/constants';
 import { MessageList } from '@components/chat/message_list/MessageList';
 import { MessageInput } from '@components/chat/message_input/MessageInput';
-import { ChatsList } from '@components/chat/chats_list/ChatsList';
+import { RoomsList } from '@components/chat/chat_rooms/RoomsList';
 
 import { Divider } from '@mui/material';
 
@@ -30,7 +30,7 @@ export function Chat() {
 
     return (
         <div className={styles.chat}>
-            <ChatsList list={CHATS_LIST} />
+            <RoomsList list={CHATS_LIST} />
             <div className={styles.chat__messages}>
                 <MessageList list={messageList}/>
                 <Divider />
