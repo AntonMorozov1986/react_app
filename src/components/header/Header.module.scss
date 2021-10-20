@@ -1,0 +1,36 @@
+@import "../../styles/scss.variables/colors";
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    font-size: 24px;
+    background-color: $blue;
+
+    &__title {
+        margin: 0;
+    }
+
+    &__menu {
+        display: block;
+
+        & .list {
+            display: flex;
+            margin: 0;
+
+            &__item {
+                margin: 0 12px 0 0;
+                list-style-type: none;
+
+                & .link {
+                    color: $black;
+                    font-weight: 600;
+                    font-size: 18px;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

@@ -8,22 +8,21 @@ const styles = {
     },
 };
 
-export function Room({ name, selected, clickItemHandler }) {
+export function Room({ author, selected }) {
     return (
         <ListItemButton
             sx={styles}
             selected={selected}
-            onClick={clickItemHandler}
         >
             <ListItemText
-                primary={name}
+                primary={author}
             />
         </ListItemButton>
     );
 }
 
 Room.propTypes = {
-    name: PropTypes.string,
+    author: PropTypes.string,
     selected: PropTypes.bool,
     clickItemHandler: PropTypes.func,
 };

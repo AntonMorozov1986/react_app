@@ -1,18 +1,19 @@
 import React from 'react';
 import styles from './MessageList.module.scss';
 
-import { Message }from '@components/chat/message_list/message/Message';
+import { Message }from '@components/chat/chat_field/message_list/message/Message';
 
-export function MessageList({ list }) {
-    if (list.length) {
+export function MessageList({ messagesList }) {
+
+    if (messagesList.length) {
         return (
             <ul
                 className={styles.messageList}
             >
-                {list.map((item, index) => {
+                {messagesList.map((message, index) => {
                     return (
                         <Message
-                            message={item}
+                            message={message}
                             key={index}/>
                     );
                 })}
@@ -27,5 +28,5 @@ export function MessageList({ list }) {
 }
 
 MessageList.propTypes = {
-    list: PropTypes.array,
+    messagesList: PropTypes.array,
 };

@@ -4,6 +4,7 @@ import { USER } from '@constants/constants';
 
 import { FormControl, Input, InputLabel, InputAdornment } from '@mui/material';
 import { FaRegPaperPlane } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
 
 const styles = {
     margin: '0.5em 0 0 0',
@@ -11,6 +12,7 @@ const styles = {
 };
 
 export function MessageInput({ sendMessage = f => f }) {
+    const { roomId } = useParams();
     const inputEl = useRef(null);
 
     const [inputValue, setInputValue] = useState('');
@@ -26,7 +28,7 @@ export function MessageInput({ sendMessage = f => f }) {
         if (evt.type === 'keydown' && evt.key !== 'Enter') {
             return;
         }
-        sendMessage(message);
+        sendMessage(roomId, message);
         setMessage({ author: '', text: '' });
         setInputValue('');
         inputEl.current.focus();
