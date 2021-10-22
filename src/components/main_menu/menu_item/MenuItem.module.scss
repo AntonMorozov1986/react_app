@@ -1,13 +1,13 @@
 @import "./src/styles/scss.variables/colors";
 
-.RoomsList {
-    margin: 0 1em 0 0;
-    padding: 15px;
-    overflow-y: auto;
+.MenuItem {
+    margin: 0 12px 0 0;
     list-style-type: none;
 
-    &__link {
+    & .link {
         color: $black;
+        font-weight: 600;
+        font-size: 18px;
         text-decoration: none;
     }
 }

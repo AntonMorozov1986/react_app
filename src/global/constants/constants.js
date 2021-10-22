@@ -12,21 +12,21 @@ export const BOT_MESSAGE_LIST = [
     'Может завтра встретимся?',
 ];
 
-export const CHATS_LIST = [
-    {
-        id: 0,
-        name: 'ChatiXBot',
+export const CHATS_LIST = {
+    'chat-bot': {
+        companion: 'ChatiXBot',
+        messages: [],
     },
-    {
-        id: 1,
-        name: 'Вася',
+    'vas': {
+        companion: 'Вася',
+        messages: [],
     },
-    {
-        id: 3,
-        name: 'Коля',
+    'kol': {
+        companion: 'Коля',
+        messages: [],
     },
-    {
-        id: 4,
-        name: 'Маша',
+    'mash': {
+        companion: 'Маша',
+        messages: [],
     },
-];
+};

@@ -1,0 +1,10 @@
+@import "./src/styles/scss.variables/colors";
+
+.MainMenu {
+    display: block;
+
+    & .list {
+        display: flex;
+        margin: 0;
+    }
+}

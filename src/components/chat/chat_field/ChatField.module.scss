@@ -1,0 +1,9 @@
+@import "./src/styles/scss.variables/colors";
+
+.ChatField {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    box-sizing: border-box;
+    padding: 15px;
+}

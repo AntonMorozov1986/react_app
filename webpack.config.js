@@ -10,6 +10,11 @@ function resolve(dir) {
 module.exports = {
     entry: './src/index.js',
     mode: appConfig('environment'),
+    output: {
+        path: resolve('dist'),
+        publicPath: '/',
+        filename: 'bundle.js',
+    },
     module: {
         rules: [
             {
@@ -42,16 +47,6 @@ module.exports = {
             '@configs': resolve('src/global/configs'),
         },
     },
-    output: {
-        path: resolve('dist/'),
-        publicPath: '',
-        filename: 'bundle.js',
-    },
-    devServer: {
-        compress: true,
-        hot: true,
-        host: appConfig('local_domain'),
-    },
     plugins: [
         new HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
@@ -69,4 +64,11 @@ module.exports = {
             PropTypes: 'prop-types',
         }),
     ],
+    devServer: {
+        compress: true,
+        hot: true,
+        host: appConfig('local_domain'),
+        historyApiFallback: true,
+    },
+    devtool: 'eval-source-map',
 };
