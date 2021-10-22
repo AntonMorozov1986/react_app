@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { CHATS_LIST } from '@constants/constants';
+import { BOT_MESSAGE_LIST, CHATS_LIST, USER } from '@constants/constants';
 import { Switch, Route } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
@@ -22,7 +22,19 @@ export function Chat() {
             },
         });
     },[roomsList]);
+    const botAnswer = (roomId, selectedRoom, messagesList) => {
+        const lastMessage = messagesList[messagesList.length -1];
 
+        if (messagesList.length && lastMessage?.author === USER.name) {
+            const getBotMessageText = () => {
+                const randomMessageListIndex = Math.floor(Math.random() * BOT_MESSAGE_LIST.length);
+                return BOT_MESSAGE_LIST[randomMessageListIndex];
+            };
+            return  setTimeout(() => (sendMessage(roomId, { author: selectedRoom.companion, text: getBotMessageText() })), 1500);
+        }
+
+        return null;
+    };
     const addChatRoom = () => {
         const companion = prompt('Введите имя собеседника');
         setRoomsList({
@@ -37,7 +49,11 @@ export function Chat() {
                 <Route path={[`${PAGE_CONFIG.url}/:roomId`, PAGE_CONFIG.url]}>
                     <RoomsList roomsList={roomsList} addChatRoom={addChatRoom}/>
                     <Route path={`${PAGE_CONFIG.url}/:roomId`}>
-                        <ChatField roomsList={roomsList} sendMessage={sendMessage}/>
+                        <ChatField
+                            roomsList={roomsList}
+                            sendMessage={sendMessage}
+                            botAnswer={botAnswer}
+                        />
                     </Route>
                     <Route exact path={PAGE_CONFIG.url}>
                         <h1>Выберите диалог</h1>

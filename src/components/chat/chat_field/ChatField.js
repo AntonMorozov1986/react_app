@@ -3,9 +3,8 @@ import { useParams,  useHistory } from 'react-router-dom';
 import { MessageList, MessageInput } from '@components';
 import { Divider } from '@mui/material';
 import styles from './ChatField.module.scss';
-import { BOT_MESSAGE_LIST } from '@constants/constants';
 
-export function ChatField({ roomsList, sendMessage = f => f }) {
+export function ChatField({ roomsList, sendMessage = f => f, botAnswer = f => f }) {
     const { roomId } = useParams();
     const { push } = useHistory();
     const selectedRoom = roomsList[roomId];
@@ -16,16 +15,7 @@ export function ChatField({ roomsList, sendMessage = f => f }) {
             push('/chats');
         }
 
-        const lastMessage = messagesList[messagesList.length -1];
-        let timeoutId = null;
-
-        if (messagesList.length && lastMessage?.author !== selectedRoom.companion) {
-            const getBotMessageText = () => {
-                const randomMessageListIndex = Math.floor(Math.random() * BOT_MESSAGE_LIST.length);
-                return BOT_MESSAGE_LIST[randomMessageListIndex];
-            };
-            timeoutId = setTimeout(() => (sendMessage(roomId, { author: selectedRoom.companion, text: getBotMessageText() })), 1500);
-        }
+        const timeoutId = botAnswer(roomId, selectedRoom, messagesList);
 
         return () => clearTimeout(timeoutId);
     }, [messagesList, roomId]);
@@ -42,4 +32,5 @@ export function ChatField({ roomsList, sendMessage = f => f }) {
 ChatField.propTypes = {
     roomsList: PropTypes.object,
     sendMessage: PropTypes.func,
+    botAnswer: PropTypes.func,
 };
