@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import styles from './profile.module.scss';
 
@@ -13,9 +13,7 @@ export function Profile() {
     const dispatch = useDispatch();
     const { name, email, isNameVisible } = useSelector(state => state.profile);
 
-    const changeNameVisibility = useCallback(() => {
-        dispatch(toggleNameVisibility());
-    }, [dispatch]);
+    const changeNameVisibility = () => { dispatch(toggleNameVisibility());};
 
     return (
         <>
