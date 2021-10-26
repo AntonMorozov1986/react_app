@@ -1,0 +1,16 @@
+@import "./src/styles/scss.variables/colors";
+
+.Profile {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1000px;
+
+    & .label {
+        & .input {
+            margin: 0 0 0 12px;
+            padding: 0;
+        }
+    }
+}

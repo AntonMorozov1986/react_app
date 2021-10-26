@@ -1,5 +1,5 @@
 export const USER = {
-    name: 'Александр',
+    name: 'Антон',
 };
 export const APP = {
     name: APP_NAME,

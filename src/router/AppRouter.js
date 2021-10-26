@@ -5,7 +5,7 @@ import styles from './AppRouter.module.scss';
 
 import { Chat, Greeting, Header, Profile } from '@components';
 
-import { APP, USER } from '@constants/constants';
+import { APP } from '@constants/constants';
 
 export function AppRouter() {
     return (
@@ -14,7 +14,7 @@ export function AppRouter() {
             <main className={styles.main}>
                 <Switch>
                     <Route exact path={'/'}>
-                        <Greeting user={USER}/>
+                        <Greeting />
                     </Route>
                     <Route path={'/chats'}>
                         <Chat />
