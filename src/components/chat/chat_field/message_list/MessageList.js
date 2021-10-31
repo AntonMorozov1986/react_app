@@ -3,7 +3,6 @@ import styles from './MessageList.module.scss';
 
 import { Message }from '@components/chat/chat_field/message_list/message/Message';
 import { useParams } from 'react-router-dom';
-import { useParamsSelector } from '@store/store_utils';
 import { getChatRoomById, sendBotMessage } from '@store/chats';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from '@store/profile';
@@ -11,7 +10,7 @@ import { getProfile } from '@store/profile';
 export function MessageList() {
     const dispatch = useDispatch();
     const { roomId } = useParams();
-    const { messages = [], companion = null } = useParamsSelector(getChatRoomById,roomId) ?? {};
+    const { messages = [], companion = null } = useSelector(getChatRoomById(roomId));
     const userName = useSelector(getProfile).name;
 
     useEffect(() => {
@@ -46,7 +45,3 @@ export function MessageList() {
 
 
 }
-
-MessageList.propTypes = {
-    messagesList: PropTypes.array,
-};

@@ -6,7 +6,6 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChatRoomById, sendNewMessage, updateInputValue } from '@store/chats';
-import { useParamsSelector } from '@store/store_utils';
 import { getProfile } from '@store/profile';
 
 const styles = {
@@ -19,7 +18,7 @@ export function MessageInput() {
     const { roomId } = useParams();
     const inputEl = useRef(null);
     const userName = useSelector(getProfile).name;
-    const { inputValue } = useParamsSelector(getChatRoomById, roomId) ?? {};
+    const { inputValue } = useSelector(getChatRoomById(roomId));
 
     useEffect(() => {
         inputEl.current.focus();
