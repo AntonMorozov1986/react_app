@@ -1,16 +1,11 @@
-import { BOT_MESSAGE_LIST, CHATS_LIST } from '@constants/constants';
+import { CHATS_LIST } from '@constants/constants';
 import {
     SET_CHATS_LIST,
     ADD_NEW_ROOM,
-    SEND_NEW_MESSAGE,
     UPDATE_INPUT_VALUE,
-    SEND_BOT_MESSAGE
+    SET_BOT_TIMER_ID,
+    CLEAR_BOT_TIMER_ID
 } from './types';
-
-const getBotMessageText = () => {
-    const randomMessageListIndex = Math.floor(Math.random() * BOT_MESSAGE_LIST.length);
-    return BOT_MESSAGE_LIST[randomMessageListIndex];
-};
 
 const initialChatsListState = CHATS_LIST;
 
@@ -29,32 +24,20 @@ export const ChatsReducer = (state = initialChatsListState, action) => {
                     inputValue: action.payload.value,
                 },
             };
-        case SEND_NEW_MESSAGE:
+        case SET_BOT_TIMER_ID:
             return {
                 ...state,
                 [action.payload.roomId]: {
                     ...state[action.payload.roomId],
-                    messages: [
-                        ...state[action.payload.roomId].messages,
-                        {
-                            author: action.payload.author,
-                            text: state[action.payload.roomId].inputValue,
-                        },
-                    ],
+                    botTimerId: action.payload.botTimerId,
                 },
             };
-        case SEND_BOT_MESSAGE:
+        case CLEAR_BOT_TIMER_ID:
             return {
                 ...state,
                 [action.payload.roomId]: {
                     ...state[action.payload.roomId],
-                    messages: [
-                        ...state[action.payload.roomId].messages,
-                        {
-                            author: action.payload.author,
-                            text: getBotMessageText(),
-                        },
-                    ],
+                    botTimerCanceler: null,
                 },
             };
         case SET_CHATS_LIST:
