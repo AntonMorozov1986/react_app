@@ -1,4 +1,7 @@
+//import node modules
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
 //import Reducers
@@ -15,11 +18,21 @@ const combinedReducers = combineReducers({
     conversations: ConversationsReducer,
 });
 
+const persistConfig = {
+    key: 'ChatiX',
+    storage,
+};
+
+const persistedReducers = persistReducer(
+    persistConfig,
+    combinedReducers
+);
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
 export const store = createStore(
-    combinedReducers,
+    persistedReducers,
     composeEnhancers(
         applyMiddleware(
             thunk,
@@ -27,3 +40,5 @@ export const store = createStore(
         )
     )
 );
+
+export const persistedStore = persistStore(store);
