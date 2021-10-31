@@ -7,10 +7,19 @@ import { Link, useParams } from 'react-router-dom';
 
 import { PAGES } from '@configs/pages.config';
 import { Button } from '@mui/material';
-const PAGE_CONFIG = PAGES.find(menuItem => menuItem.name === 'chats_page');
+import { useDispatch, useSelector } from 'react-redux';
+import { addNewRoom, getChatsList } from '@store/chats';
+const CHAT_PAGE_CONFIG = PAGES.find(menuItem => menuItem.name === 'chats_page');
 
-export function RoomsList({ roomsList, addChatRoom = f => f }) {
+export function RoomsList() {
+    const dispatch = useDispatch();
     const { roomId } = useParams();
+    const roomsList = useSelector(getChatsList);
+
+    const addChatRoom = () => {
+        const companionName = prompt('Введите имя нового собеседника');
+        dispatch(addNewRoom(companionName));
+    };
 
     const roomsListMemo = useMemo(() => {
         return Object.keys(roomsList).map(roomKey => {
@@ -18,7 +27,7 @@ export function RoomsList({ roomsList, addChatRoom = f => f }) {
                 <Link
                     className={styles.RoomsList__link}
                     key={roomKey}
-                    to={`${PAGE_CONFIG.url}/${roomKey}`}>
+                    to={`${CHAT_PAGE_CONFIG.url}/${roomKey}`}>
                     <Room
                         author={roomsList[roomKey].companion}
                         selected={roomKey === roomId}
@@ -41,7 +50,3 @@ export function RoomsList({ roomsList, addChatRoom = f => f }) {
     );
 }
 
-RoomsList.propTypes = {
-    roomsList: PropTypes.object,
-    addChatRoom: PropTypes.func,
-};

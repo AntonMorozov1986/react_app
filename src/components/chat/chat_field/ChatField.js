@@ -1,37 +1,27 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useParams,  useHistory } from 'react-router-dom';
 import { MessageList, MessageInput } from '@components';
 import { Divider } from '@mui/material';
 import styles from './ChatField.module.scss';
+import { getChatRoomById } from '@store/chats';
+import { useSelector } from 'react-redux';
 
-export function ChatField({ roomsList, sendMessage = f => f, botAnswer = f => f }) {
+export function ChatField() {
     const { roomId } = useParams();
     const { push } = useHistory();
-    const messagesList = useMemo(() => {
-        return roomsList[roomId]?.messages ?? [];
-    }, [roomsList, roomId]);
+    const chatRoom = useSelector(getChatRoomById(roomId));
 
     useEffect(() => {
-        if (!roomsList[roomId]) {
+        if (!chatRoom) {
             push('/chats');
         }
-
-        const timeoutId = botAnswer(roomId, roomsList[roomId], messagesList);
-
-        return () => clearTimeout(timeoutId);
-    }, [roomsList, roomId, push, botAnswer, messagesList]);
+    }, [chatRoom, roomId, push]);
 
     return (
         <div className={styles.ChatField}>
-            <MessageList messagesList={messagesList}/>
+            <MessageList />
             <Divider />
-            <MessageInput sendMessage={sendMessage}/>
+            <MessageInput />
         </div>
     );
 }
-
-ChatField.propTypes = {
-    roomsList: PropTypes.object,
-    sendMessage: PropTypes.func,
-    botAnswer: PropTypes.func,
-};

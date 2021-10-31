@@ -15,18 +15,22 @@ export const BOT_MESSAGE_LIST = [
 export const CHATS_LIST = {
     'chat-bot': {
         companion: 'ChatiXBot',
+        inputValue: '',
         messages: [],
     },
     'vas': {
         companion: 'Вася',
+        inputValue: '',
         messages: [],
     },
     'kol': {
         companion: 'Коля',
+        inputValue: '',
         messages: [],
     },
     'mash': {
         companion: 'Маша',
+        inputValue: '',
         messages: [],
     },
 };

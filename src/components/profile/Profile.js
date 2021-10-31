@@ -7,11 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Input, InputAdornment, Switch, FormControlLabel } from '@mui/material';
 import { FaUserEdit, FaAt } from 'react-icons/fa';
 
-import { toggleNameVisibility } from '../../store/profile';
+import { toggleNameVisibility, getProfile } from '@store/profile';
 
 export function Profile() {
     const dispatch = useDispatch();
-    const { name, email, isNameVisible } = useSelector(state => state.profile);
+    const { name, email, isNameVisible } = useSelector(getProfile);
 
     const changeNameVisibility = () => { dispatch(toggleNameVisibility());};
 

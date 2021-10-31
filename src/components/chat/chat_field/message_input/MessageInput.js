@@ -1,26 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { USER } from '@constants/constants';
 
 import { FormControl, Input, InputLabel, InputAdornment } from '@mui/material';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChatRoomById, sendNewMessage, updateInputValue } from '@store/chats';
+import { getProfile } from '@store/profile';
 
 const styles = {
     margin: '0.5em 0 0 0',
     width: '100%',
 };
 
-export function MessageInput({ sendMessage = f => f }) {
+export function MessageInput() {
+    const dispatch = useDispatch();
     const { roomId } = useParams();
     const inputEl = useRef(null);
+    const userName = useSelector(getProfile).name;
+    const { inputValue } = useSelector(getChatRoomById(roomId));
 
-    const [inputValue, setInputValue] = useState('');
-    const [message, setMessage] = useState({ author: '', text: '' });
+    useEffect(() => {
+        inputEl.current.focus();
+    });
 
     const changeHandler = evt => {
-        setInputValue(evt.target.value);
-        setMessage({ author: USER.name, text: evt.target.value });
+        dispatch(updateInputValue(roomId, evt.target.value));
     };
     const sendMessageHandler = evt => {
         if (!inputValue) return;
@@ -28,9 +33,8 @@ export function MessageInput({ sendMessage = f => f }) {
         if (evt.type === 'keydown' && evt.key !== 'Enter') {
             return;
         }
-        sendMessage(roomId, message);
-        setMessage({ author: '', text: '' });
-        setInputValue('');
+        dispatch(sendNewMessage(roomId, userName));
+        dispatch(updateInputValue(roomId, ''));
         inputEl.current.focus();
     };
 

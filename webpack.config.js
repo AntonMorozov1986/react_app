@@ -45,6 +45,8 @@ module.exports = {
             '@components': resolve('src/components'),
             '@constants': resolve('src/global/constants'),
             '@configs': resolve('src/global/configs'),
+            '@router': resolve('src/router'),
+            '@store': resolve('src/store'),
         },
     },
     plugins: [

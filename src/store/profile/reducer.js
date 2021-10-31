@@ -27,7 +27,7 @@ export const ProfileReducer = (state = initialProfileState, action) => {
         case SET_PROFILE:
             return {
                 ...state,
-                ...action,
+                ...action.payload,
             };
         default:
             return state;
