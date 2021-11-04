@@ -5,7 +5,8 @@ import { FormControl, Input, InputLabel, InputAdornment } from '@mui/material';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChatRoomById, sendNewMessage, updateInputValue } from '@store/chats';
+import { getChatRoomById, updateInputValue } from '@store/chats';
+import { sendNewMessage } from '@store/conversations/thunks';
 import { getProfile } from '@store/profile';
 
 const styles = {

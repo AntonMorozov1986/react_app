@@ -1,12 +1,15 @@
-import { ADD_NEW_ROOM, SEND_BOT_MESSAGE, SEND_NEW_MESSAGE, UPDATE_INPUT_VALUE } from '@store/chats/types';
-import { nanoid } from 'nanoid';
+import {
+    ADD_NEW_ROOM,
+    CLEAR_BOT_TIMER_ID,
+    SET_BOT_TIMER_ID,
+    UPDATE_INPUT_VALUE
+} from './types';
 
-export const addNewRoom = companionName => {
+export const addNewRoom = (companionName, roomId) => {
     const newRoom = {
-        [nanoid()]: {
+        [roomId]: {
             companion: companionName,
             inputValue: '',
-            messages: [],
         },
     };
 
@@ -26,22 +29,21 @@ export const updateInputValue = (roomId, value) => {
     };
 };
 
-export const sendNewMessage = (roomId, author) => {
+export const setBotTimerId = (roomId, botTimerId) => {
     return {
-        type: SEND_NEW_MESSAGE,
+        type: SET_BOT_TIMER_ID,
         payload: {
             roomId,
-            author,
+            botTimerId,
         },
     };
 };
 
-export const sendBotMessage = (roomId, companion) => {
+export const clearBotTimerId = roomId => {
     return {
-        type: SEND_BOT_MESSAGE,
+        type: CLEAR_BOT_TIMER_ID,
         payload: {
             roomId,
-            author: companion,
         },
     };
 };

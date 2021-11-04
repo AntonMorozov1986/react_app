@@ -12,7 +12,7 @@ export function ChatField() {
     const chatRoom = useSelector(getChatRoomById(roomId));
 
     useEffect(() => {
-        if (!chatRoom) {
+        if (!chatRoom.companion) {
             push('/chats');
         }
     }, [chatRoom, roomId, push]);

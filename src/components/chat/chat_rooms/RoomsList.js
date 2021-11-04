@@ -8,18 +8,13 @@ import { Link, useParams } from 'react-router-dom';
 import { PAGES } from '@configs/pages.config';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewRoom, getChatsList } from '@store/chats';
+import { createNewRoom, getChatsList } from '@store/chats';
 const CHAT_PAGE_CONFIG = PAGES.find(menuItem => menuItem.name === 'chats_page');
 
 export function RoomsList() {
     const dispatch = useDispatch();
     const { roomId } = useParams();
     const roomsList = useSelector(getChatsList);
-
-    const addChatRoom = () => {
-        const companionName = prompt('Введите имя нового собеседника');
-        dispatch(addNewRoom(companionName));
-    };
 
     const roomsListMemo = useMemo(() => {
         return Object.keys(roomsList).map(roomKey => {
@@ -43,7 +38,7 @@ export function RoomsList() {
                 sx={{ mb: '12px' }}
                 variant="contained"
                 color="secondary"
-                onClick={addChatRoom}
+                onClick={() => dispatch(createNewRoom())}
             >Новый чат</Button>
             {roomsListMemo}
         </ul>

@@ -1,7 +1,7 @@
 export const getChatsList = state => {
-    return state.chatsList;
+    return state.chats;
 };
 
 export const getChatRoomById = id => state => {
-    return state.chatsList[id] ?? {};
+    return state.chats[id] ?? {};
 };

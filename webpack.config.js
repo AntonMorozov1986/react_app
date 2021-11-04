@@ -55,6 +55,7 @@ module.exports = {
             title: appConfig('name'),
             filename: 'index.html',
             template: 'public/index.html',
+            favicon: 'public/favicon.svg',
             inject: true,
         }),
         new DefinePlugin({
