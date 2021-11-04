@@ -54,6 +54,7 @@ module.exports = {
         IS_PRODUCTION: true,
         APP_NAME: true,
         PropTypes: true,
+        API_BASE_URL: true,
     },
     rules: {
         'camelcase': [0, {

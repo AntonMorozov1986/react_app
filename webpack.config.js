@@ -47,6 +47,7 @@ module.exports = {
             '@configs': resolve('src/global/configs'),
             '@router': resolve('src/router'),
             '@store': resolve('src/store'),
+            '@api': resolve('src/api'),
         },
     },
     plugins: [
@@ -62,6 +63,7 @@ module.exports = {
             ENVIRONMENT_MODE: JSON.stringify(process.env.NODE_ENV),
             IS_PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production'),
             APP_NAME: JSON.stringify(appConfig('name')),
+            API_BASE_URL: JSON.stringify(appConfig('api_url')),
         }),
         new ProvidePlugin({
             PropTypes: 'prop-types',

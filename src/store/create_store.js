@@ -11,16 +11,20 @@ import { ConversationsReducer } from '@store/conversations';
 
 //import middlewares
 import { timeScheduler } from '@store/middlewares';
+import { GistsReducer } from '@store/gists';
+import { getGistsList } from '@api';
 
 const combinedReducers = combineReducers({
     profile: ProfileReducer,
     chats: ChatsReducer,
     conversations: ConversationsReducer,
+    gists: GistsReducer,
 });
 
 const persistConfig = {
     key: 'ChatiX',
     storage,
+    blacklist: ['gists'],
 };
 
 const persistedReducers = persistReducer(
@@ -35,7 +39,7 @@ export const store = createStore(
     persistedReducers,
     composeEnhancers(
         applyMiddleware(
-            thunk,
+            thunk.withExtraArgument({ getGistsList }),
             timeScheduler
         )
     )

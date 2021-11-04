@@ -11,7 +11,12 @@ const APP_CONFIG = {
     },
     local_domain: {
         default: 'chatix.local',
-        value: process.env.VUE_APP_LOCAL_DEV_DOMAIN,
+        value: process.env.LOCAL_DEV_DOMAIN,
+        type: String,
+    },
+    api_url: {
+        default: 'https://api.github.com',
+        value: process.env.API_BASE_URL,
         type: String,
     },
 };

@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 import styles from './AppRouter.module.scss';
 
-import { Chat, Greeting, Header, Profile } from '@components';
+import { Chat, Greeting, Header, Profile, Gists } from '@components';
 
 import { APP } from '@constants/constants';
 
@@ -21,6 +21,9 @@ export function AppRouter() {
                     </Route>
                     <Route path={'/profile'}>
                         <Profile />
+                    </Route>
+                    <Route path={'/gists'}>
+                        <Gists />
                     </Route>
                     <Route path={'*'}>
                         <h1>Упс :-( Такая страница не найдена</h1>
