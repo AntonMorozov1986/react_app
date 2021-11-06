@@ -5,13 +5,11 @@ import { Room } from '@components/chat/chat_rooms/room/Room';
 import styles from './RoomsList.module.scss';
 import { Link, useParams } from 'react-router-dom';
 
-import { PAGES } from '@configs/pages.config';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewRoom, getChatsList } from '@store/chats';
-const CHAT_PAGE_CONFIG = PAGES.find(menuItem => menuItem.name === 'chats_page');
 
-export function RoomsList() {
+export function RoomsList({ chatsPath }) {
     const dispatch = useDispatch();
     const { roomId } = useParams();
     const roomsList = useSelector(getChatsList);
@@ -22,7 +20,7 @@ export function RoomsList() {
                 <Link
                     className={styles.RoomsList__link}
                     key={roomKey}
-                    to={`${CHAT_PAGE_CONFIG.url}/${roomKey}`}>
+                    to={`${chatsPath}/${roomKey}`}>
                     <Room
                         author={roomsList[roomKey].companion}
                         selected={roomKey === roomId}
@@ -30,7 +28,7 @@ export function RoomsList() {
                 </Link>
             );
         });
-    }, [roomsList, roomId]);
+    }, [roomsList, roomId, chatsPath]);
 
     return (
         <ul className={styles.RoomsList}>
@@ -45,3 +43,6 @@ export function RoomsList() {
     );
 }
 
+RoomsList.propTypes = {
+    chatsPath: PropTypes.string,
+};

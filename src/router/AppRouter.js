@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
+import { PAGES } from '@configs/pages.config';
+
 import styles from './AppRouter.module.scss';
 
-import { Chat, Greeting, Header, Profile, Gists } from '@components';
+import { Header } from '@components';
 
 import { APP } from '@constants/constants';
-import { Auth } from '@pages/auth/Auth';
 import { useDispatch } from 'react-redux';
 import { checkAuth } from '@store/auth';
 
@@ -21,21 +22,14 @@ export function AppRouter() {
             <Header app={APP}/>
             <main className={styles.main}>
                 <Switch>
-                    <Route exact path={'/'}>
-                        <Greeting />
-                    </Route>
-                    <Route path={'/chats'}>
-                        <Chat />
-                    </Route>
-                    <Route path={'/profile'}>
-                        <Profile />
-                    </Route>
-                    <Route path={'/gists'}>
-                        <Gists />
-                    </Route>
-                    <Route path={'/auth'}>
-                        <Auth />
-                    </Route>
+                    {
+                        PAGES.map(page => {
+                            if (page.url === '/') {
+                                return <Route exact path={'/'} component={page.component} key={page.name}/>;
+                            }
+                            return <Route path={page.url} component={page.component} key={page.name}/>;
+                        })
+                    }
                     <Route path={'*'}>
                         <h1>Упс :-( Такая страница не найдена</h1>
                         <h2>404</h2>

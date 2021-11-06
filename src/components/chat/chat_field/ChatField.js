@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams,  useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { MessageList, MessageInput } from '@components';
 import { Divider } from '@mui/material';
 import styles from './ChatField.module.scss';
