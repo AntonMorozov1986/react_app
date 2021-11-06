@@ -1,3 +1,13 @@
+const FIREBASE_CONFIG_ENV = JSON.stringify({
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBAS_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+});
+
 const APP_CONFIG = {
     name: {
         default: 'ChatiX',
@@ -18,6 +28,11 @@ const APP_CONFIG = {
         default: 'https://api.github.com',
         value: process.env.API_BASE_URL,
         type: String,
+    },
+    firebase_config: {
+        default: FIREBASE_CONFIG_ENV,
+        value: process.env.FIREBASE_CONFIG,
+        type: Object,
     },
 };
 

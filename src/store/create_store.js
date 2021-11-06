@@ -5,26 +5,26 @@ import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
 //import Reducers
-import { ProfileReducer } from '@store/profile';
 import { ChatsReducer } from '@store/chats';
 import { ConversationsReducer } from '@store/conversations';
+import { GistsReducer } from '@store/gists';
+import { AuthReducer } from '@store/auth';
 
 //import middlewares
 import { timeScheduler } from '@store/middlewares';
-import { GistsReducer } from '@store/gists';
 import { getGistsList } from '@api';
 
 const combinedReducers = combineReducers({
-    profile: ProfileReducer,
     chats: ChatsReducer,
     conversations: ConversationsReducer,
     gists: GistsReducer,
+    auth: AuthReducer,
 });
 
 const persistConfig = {
     key: 'ChatiX',
     storage,
-    blacklist: ['gists'],
+    blacklist: ['gists', 'auth', 'conversations'],
 };
 
 const persistedReducers = persistReducer(

@@ -19,4 +19,10 @@ export const PAGES = [
         title: 'Gists',
         url: '/gists',
     },
+    {
+        name: 'auth_page',
+        title: 'Auth',
+        url: '/auth',
+    },
+
 ];

@@ -1,0 +1,34 @@
+@import "./src/styles/scss.variables/colors";
+
+.AuthTypeButtons {
+    display: flex;
+    padding: 1em;
+
+    &__button {
+        border-radius: 0;
+    }
+}
+
+.AuthForm {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1000px;
+
+    & .input {
+        display: flex;
+        width: 100%;
+        margin: 0 0 12px;
+
+        &__ico {
+            align-self: flex-end;
+            margin: 0 8px 8px 0;
+            font-size: 1.5em;
+        }
+
+        &__text {
+            flex-grow: 2;
+        }
+    }
+}

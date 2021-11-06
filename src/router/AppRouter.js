@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 import styles from './AppRouter.module.scss';
@@ -6,8 +6,16 @@ import styles from './AppRouter.module.scss';
 import { Chat, Greeting, Header, Profile, Gists } from '@components';
 
 import { APP } from '@constants/constants';
+import { Auth } from '@pages/auth/Auth';
+import { useDispatch } from 'react-redux';
+import { checkAuth } from '@store/auth';
 
 export function AppRouter() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(checkAuth());
+    }, [dispatch]);
+
     return (
         <BrowserRouter>
             <Header app={APP}/>
@@ -24,6 +32,9 @@ export function AppRouter() {
                     </Route>
                     <Route path={'/gists'}>
                         <Gists />
+                    </Route>
+                    <Route path={'/auth'}>
+                        <Auth />
                     </Route>
                     <Route path={'*'}>
                         <h1>Упс :-( Такая страница не найдена</h1>

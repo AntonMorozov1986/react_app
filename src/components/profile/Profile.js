@@ -2,23 +2,32 @@ import React from 'react';
 
 import styles from './profile.module.scss';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Input, InputAdornment, Switch, FormControlLabel } from '@mui/material';
+import { Button, Input, InputAdornment } from '@mui/material';
 import { FaUserEdit, FaAt } from 'react-icons/fa';
 
-import { toggleNameVisibility, getProfile } from '@store/profile';
+import { getUser, logOut } from '@store/auth';
+import { useHistory } from 'react-router-dom';
 
 export function Profile() {
     const dispatch = useDispatch();
-    const { name, email, isNameVisible } = useSelector(getProfile);
+    const { push } = useHistory();
+    const { displayName = '', email = '' } = useSelector(getUser);
 
-    const changeNameVisibility = () => { dispatch(toggleNameVisibility());};
+    const logOutHandler = async () => {
+        try {
+            await dispatch(logOut());
+            push('/');
+        } catch (err) {
+            alert(err.message);
+        }
+    };
 
     return (
         <>
             <h1>Ваш профиль</h1>
-            <h3>{isNameVisible ? name : 'Вы скрыли свое имя'}</h3>
+            <h3>{displayName}</h3>
             <h3>Здесь Вы можете отредактировать свой профиль</h3>
             <form
                 className={styles.Profile}
@@ -37,7 +46,7 @@ export function Profile() {
                                 <FaUserEdit/>
                             </InputAdornment>
                         }
-                        value={name}
+                        value={displayName}
                         disabled
                     />
                 </label>
@@ -58,18 +67,12 @@ export function Profile() {
                         disabled
                     />
                 </label>
-                <FormControlLabel
-                    sx={{
-                        display: 'block',
-                        margin: '0',
-                    }}
-                    control={
-                        <Switch />
-                    }
-                    label="Показать имя"
-                    checked={isNameVisible}
-                    onChange={changeNameVisibility}
-                />
+                <Button
+                    variant={'contained'}
+                    onClick={logOutHandler}
+                >
+                    Выйти
+                </Button>
             </form >
         </>
     );

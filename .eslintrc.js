@@ -55,6 +55,7 @@ module.exports = {
         APP_NAME: true,
         PropTypes: true,
         API_BASE_URL: true,
+        FIREBASE_CONFIG: true,
     },
     rules: {
         'camelcase': [0, {
