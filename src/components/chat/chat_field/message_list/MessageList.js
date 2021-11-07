@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './MessageList.module.scss';
 
 import { Message }from '@components/chat/chat_field/message_list/message/Message';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getMessagesByRoomId } from '@store/conversations';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMessagesByRoomId, requestMessagesByRoomId } from '@store/conversations';
 
 export function MessageList() {
+    const dispatch = useDispatch();
     const { roomId } = useParams();
     const messages = useSelector(getMessagesByRoomId(roomId));
+
+    useEffect(() => {
+        dispatch(requestMessagesByRoomId(roomId));
+    }, [dispatch, roomId]);
 
     if (messages.length) {
         return (

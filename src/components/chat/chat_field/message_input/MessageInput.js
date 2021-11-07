@@ -19,7 +19,7 @@ export function MessageInput() {
     const { roomId } = useParams();
     const inputEl = useRef(null);
     const { displayName } = useSelector(getUser);
-    const { inputValue } = useSelector(getChatRoomById(roomId));
+    const { inputValue = '' } = useSelector(getChatRoomById(roomId));
 
     useEffect(() => {
         inputEl.current.focus();

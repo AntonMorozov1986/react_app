@@ -8,9 +8,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewRoom, getChatsList } from '@store/chats';
+import { getUser } from '@store/auth';
 
 export function RoomsList({ chatsPath }) {
     const dispatch = useDispatch();
+    const { uid: userId } = useSelector(getUser);
     const { roomId } = useParams();
     const roomsList = useSelector(getChatsList);
 
@@ -36,7 +38,7 @@ export function RoomsList({ chatsPath }) {
                 sx={{ mb: '12px' }}
                 variant="contained"
                 color="secondary"
-                onClick={() => dispatch(createNewRoom())}
+                onClick={() => dispatch(createNewRoom(userId))}
             >Новый чат</Button>
             {roomsListMemo}
         </ul>

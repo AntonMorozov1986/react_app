@@ -1,3 +1,2 @@
-export const SET_CONVERSATIONS_LIST = '@conversations/set conversations list';
-export const ADD_NEW_CONVERSATION = '@conversations/add new conversation';
-export const ADD_NEW_MESSAGE = '@conversations/add new message';
+export const SET_MESSAGES_LIST_BY_ROOM_ID = '@conversations/set messages by room id';
+export const CLEAR_CONVERSATIONS_LIST = '@conversations/clear conversations list';

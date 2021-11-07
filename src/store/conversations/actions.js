@@ -1,22 +1,17 @@
-import { ADD_NEW_CONVERSATION, ADD_NEW_MESSAGE } from './types';
+import { CLEAR_CONVERSATIONS_LIST, SET_MESSAGES_LIST_BY_ROOM_ID } from './types';
 
-export const addNewConversation = roomId => {
+export const setMessagesByRoomID = (roomId, messages) => {
     return {
-        type: ADD_NEW_CONVERSATION,
-        payload: roomId,
+        type: SET_MESSAGES_LIST_BY_ROOM_ID,
+        payload: {
+            messages,
+            roomId,
+        },
     };
 };
 
-export const addNewMessage = (roomId, author, text, delay) => {
+export const clearConversationsList = () => {
     return {
-        type: ADD_NEW_MESSAGE,
-        payload: {
-            roomId,
-            author,
-            text,
-        },
-        meta: {
-            delay,
-        },
+        type: CLEAR_CONVERSATIONS_LIST,
     };
 };

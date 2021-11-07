@@ -1,23 +1,10 @@
 import {
-    ADD_NEW_ROOM,
     CLEAR_BOT_TIMER_ID,
     SET_BOT_TIMER_ID,
-    UPDATE_INPUT_VALUE
+    SET_CHATS_LIST,
+    UPDATE_INPUT_VALUE,
+    CLEAR_CHATS_LIST
 } from './types';
-
-export const addNewRoom = (companionName, roomId) => {
-    const newRoom = {
-        [roomId]: {
-            companion: companionName,
-            inputValue: '',
-        },
-    };
-
-    return {
-        type: ADD_NEW_ROOM,
-        payload: newRoom,
-    };
-};
 
 export const updateInputValue = (roomId, value) => {
     return {
@@ -45,5 +32,20 @@ export const clearBotTimerId = roomId => {
         payload: {
             roomId,
         },
+    };
+};
+
+export const setChatsList = chatsList => {
+    return {
+        type: SET_CHATS_LIST,
+        payload: {
+            ...chatsList,
+        },
+    };
+};
+
+export const clearChatsList = () => {
+    return {
+        type: CLEAR_CHATS_LIST,
     };
 };

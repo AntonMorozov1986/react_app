@@ -1,15 +1,20 @@
-import { addNewConversation } from '@store/conversations';
-import { addNewRoom } from '@store/chats';
+import { setChatsList } from '@store/chats';
 
 import { nanoid } from 'nanoid';
+import { addNewRoomApi, getChatsListApi } from '@api/database';
 
-export const createNewRoom = () => dispatch => {
+export const requestChatsList = () => async (dispatch, getState) => {
+    const { uid: userId } = getState().auth.user;
+    const chatsList = await getChatsListApi(userId);
+    dispatch(setChatsList(chatsList));
+};
+
+export const createNewRoom = userId => async () => {
     const newCompanionName = prompt('Введите имя нового собеседника');
     if (!newCompanionName) {
         alert('Вы не ввели имя');
         return;
     }
     const roomId = nanoid();
-    dispatch(addNewRoom(newCompanionName, roomId));
-    dispatch(addNewConversation(roomId));
+    await addNewRoomApi(userId, roomId, newCompanionName);
 };

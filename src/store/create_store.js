@@ -24,7 +24,7 @@ const combinedReducers = combineReducers({
 const persistConfig = {
     key: 'ChatiX',
     storage,
-    blacklist: ['gists', 'auth', 'conversations'],
+    blacklist: ['gists', 'auth', 'conversations', 'chats'],
 };
 
 const persistedReducers = persistReducer(

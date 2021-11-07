@@ -8,7 +8,15 @@ import { isAuth } from '@store/auth';
 export  function MainMenu() {
     const isUserAuth = useSelector(isAuth);
     const preparedMenuList = useMemo(() => {
-        return PAGES.filter(page => page.isProtected === isUserAuth);
+        return PAGES.filter(page => {
+            if (page.name === 'auth_page' && isUserAuth) {
+                return false;
+            }
+            if (!page.isProtected) {
+                return true;
+            }
+            return page.isProtected === isUserAuth;
+        });
     },[isUserAuth]);
     return (
         <nav className={styles.MainMenu}>

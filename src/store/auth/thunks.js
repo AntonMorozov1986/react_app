@@ -1,8 +1,11 @@
 import { signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '@api/firebase';
 import { deleteUser, setUser } from '@store/auth/actions';
+import { clearChatsList, requestChatsList, setChatsList } from '@store/chats';
+import { subscribeToChatsList } from '@api/database';
+import { clearConversationsList } from '@store/conversations';
 
-export const logIn = (email = 'tester@user.ru', password = '111111') => async dispatch => {
+export const logIn = (email, password) => async dispatch => {
     try {
         await signInWithEmailAndPassword(firebaseAuth, email, password);
         const { currentUser } = firebaseAuth;
@@ -34,12 +37,16 @@ export const logUp = (email, password, name) => async dispatch => {
     }
 };
 
-export const checkAuth = () => dispatch => {
+export const checkAuth = () => async dispatch => {
     onAuthStateChanged(firebaseAuth, user => {
         if (user) {
             dispatch(setUser(user));
+            dispatch(requestChatsList());
+            subscribeToChatsList(user.uid, chatsList => dispatch(setChatsList(chatsList)));
         } else {
             dispatch(deleteUser());
+            dispatch(clearChatsList());
+            dispatch(clearConversationsList());
         }
     });
 };
