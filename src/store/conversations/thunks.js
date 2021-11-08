@@ -9,11 +9,14 @@ const getRandomBotMessage = () => {
 
 export const sendNewMessage = (roomId, author) => (dispatch, getState) => {
     const { companion, inputValue, botTimerId } = getState().chats[roomId];
+
     if (botTimerId) {
         clearTimeout(botTimerId);
         dispatch(clearBotTimerId(roomId));
     }
+
     dispatch(addNewMessage(roomId, author, inputValue));
+
     if (author === getState().profile.name) {
         const timerId = dispatch(addNewMessage(roomId, companion, getRandomBotMessage(), 1500));
         dispatch(setBotTimerId(roomId, timerId));

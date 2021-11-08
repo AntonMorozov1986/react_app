@@ -14,4 +14,9 @@ export const PAGES = [
         title: 'Chats',
         url: '/chats',
     },
+    {
+        name: 'gists_page',
+        title: 'Gists',
+        url: '/gists',
+    },
 ];
