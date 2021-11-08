@@ -6,8 +6,8 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChatRoomById, updateInputValue } from '@store/chats';
-import { sendNewMessage } from '@store/conversations/thunks';
-import { getProfile } from '@store/profile';
+import { sendNewMessage } from '@store/conversations';
+import { getUser } from '@store/auth';
 
 const styles = {
     margin: '0.5em 0 0 0',
@@ -18,8 +18,8 @@ export function MessageInput() {
     const dispatch = useDispatch();
     const { roomId } = useParams();
     const inputEl = useRef(null);
-    const userName = useSelector(getProfile).name;
-    const { inputValue } = useSelector(getChatRoomById(roomId));
+    const { displayName } = useSelector(getUser);
+    const { inputValue = '' } = useSelector(getChatRoomById(roomId));
 
     useEffect(() => {
         inputEl.current.focus();
@@ -34,7 +34,7 @@ export function MessageInput() {
         if (evt.type === 'keydown' && evt.key !== 'Enter') {
             return;
         }
-        dispatch(sendNewMessage(roomId, userName));
+        dispatch(sendNewMessage(roomId, displayName));
         dispatch(updateInputValue(roomId, ''));
         inputEl.current.focus();
     };

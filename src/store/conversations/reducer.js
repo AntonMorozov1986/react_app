@@ -1,37 +1,19 @@
-import { CONVERSATIONS_LIST } from '@constants/constants';
 import {
-    SET_CONVERSATIONS_LIST,
-    ADD_NEW_CONVERSATION,
-    ADD_NEW_MESSAGE
+    SET_MESSAGES_LIST_BY_ROOM_ID,
+    CLEAR_CONVERSATIONS_LIST
 } from './types';
-import { nanoid } from 'nanoid';
 
-const initialConversationsListState = CONVERSATIONS_LIST;
+const initialConversationsListState = {};
 
 export const ConversationsReducer = (state = initialConversationsListState, action) => {
     switch (action.type) {
-        case ADD_NEW_CONVERSATION:
+        case SET_MESSAGES_LIST_BY_ROOM_ID:
             return {
                 ...state,
-                [action.payload]: [],
+                [action.payload.roomId]: action.payload.messages,
             };
-        case ADD_NEW_MESSAGE:
-            return {
-                ...state,
-                [action.payload.roomId]: [
-                    ...state[action.payload.roomId],
-                    {
-                        id: nanoid(),
-                        author: action.payload.author,
-                        text: action.payload.text,
-                    },
-                ],
-            };
-        case SET_CONVERSATIONS_LIST:
-            return {
-                ...state,
-                ...action.payload,
-            };
+        case CLEAR_CONVERSATIONS_LIST:
+            return {};
         default:
             return state;
     }

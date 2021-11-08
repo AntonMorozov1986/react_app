@@ -13,6 +13,7 @@ import { persistedStore, store } from '@store/create_store';
 import { AppRouter } from '@router';
 
 export function App() {
+
     return (
         <div className={styles.App}>
             <Provider store={store}>
