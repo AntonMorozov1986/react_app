@@ -49,6 +49,17 @@ module.exports = {
             { name: 'Link', linkAttribute: 'to' },
         ],
     },
+    overrides: [
+        {
+            files: [
+                '**/*.spec.js',
+                '**/*.spec.jsx',
+            ],
+            env: {
+                jest: true,
+            },
+        },
+    ],
     globals: {
         ENVIRONMENT_MODE: true,
         IS_PRODUCTION: true,
