@@ -7,7 +7,8 @@
         "serve": "cross-env NODE_ENV=develop webpack serve",
         "lint": "npm run lint:css && npm run lint:js",
         "lint:js": "eslint ./src --ext .js --fix",
-        "lint:css": "stylelint \"./src/**/*.{css,sass,scss}\" --fix"
+        "lint:css": "stylelint \"./src/**/*.{css,sass,scss}\" --fix",
+        "test:unit": "node -r dotenv/config $(which jest)"
     },
     "repository": {
         "type": "git",
@@ -46,6 +47,9 @@
         "@babel/plugin-transform-runtime": "^7.16.0",
         "@babel/preset-env": "^7.15.6",
         "@babel/preset-react": "^7.14.5",
+        "@testing-library/jest-dom": "^5.15.0",
+        "@testing-library/react": "^12.1.2",
+        "babel-jest": "^27.3.1",
         "babel-loader": "^8.2.2",
         "cross-env": "^7.0.3",
         "css-loader": "^6.3.0",
@@ -57,6 +61,9 @@
         "eslint-plugin-react": "^7.26.1",
         "eslint-plugin-react-hooks": "^4.2.0",
         "html-webpack-plugin": "^5.3.2",
+        "jest": "^27.3.1",
+        "jest-webpack-resolver": "^0.3.0",
+        "react-test-renderer": "^17.0.2",
         "sass": "^1.42.1",
         "sass-loader": "^12.1.0",
         "style-loader": "^3.3.0",

@@ -14,7 +14,7 @@ import { AuthReducer } from '@store/auth';
 import { timeScheduler } from '@store/middlewares';
 import { getGistsList } from '@api';
 
-const combinedReducers = combineReducers({
+export const combinedReducers = combineReducers({
     chats: ChatsReducer,
     conversations: ConversationsReducer,
     gists: GistsReducer,
